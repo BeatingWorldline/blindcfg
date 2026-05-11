@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>56.9钻石福袋 · 尊享典藏</title>
+  <script>
+    (function (window, document) {
+      var docEl = document.documentElement;
+
+      function isPc() {
+        var userAgent = navigator.userAgent;
+        if( userAgent.match(/Android/i) || userAgent.match(/webOS/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPad/i) || userAgent.match(/iPod/i) || userAgent.match(/BlackBerry/i) || userAgent.match(/Windows Phone/i) ){
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function setRemUnit() {
+        if (isPc()) {
+          docEl.style.fontSize = "37.5px";
+        } else {
+          var rem = docEl.clientWidth / 10;
+          docEl.style.fontSize = rem + 'px';
+        }
+      }
+      setRemUnit();
+      window.addEventListener('resize', setRemUnit);
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          setRemUnit();
+        }
+      });
+    }(window, document));
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="activity" id="activity">
+    <div class="banner-top" id="banner-top">
+      <div class="right-area" id="goto-order">
+        <div class="top-order"></div>
+        <p>福袋</p>
+      </div>
+    </div>
+
+    <div class="prize-content">
+      <!-- 抽奖按钮区域 -->
+      <div class="prize-lottery">
+        <img class="lottery-left" id="lottery-1" src="./images/1.png" alt="">
+        <p class="lottery-text" id="lottery-text-1">¥56.9</p>
+        <img class="lottery-right" id="lottery-5" src="./images/5.png" alt="">
+        <p class="lottery-text lottery-text-right" id="lottery-text-5">¥280</p>
+        <div class="lottery-badge1">必出传说/史诗</div>
+        <div class="lottery-badge2">立减4.5元</div>
+      </div>
+
+      <!-- 中奖滚动区域 -->
+      <div class="prize-winner">
+        <div class="scroll-container">
+          <div class="scroll-content" id="winner-scroll">
+            <!-- 由 main.js 渲染中奖信息 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 全部奖品区域 -->
+      <div class="prize-all" id="prize-all">
+        <div class="prize-offset-outside" id="prize-offset-outside">
+          <div class="prize-offset" id="prize-offset">
+            <!-- 由 main.js 渲染游戏列表 -->
+          </div>
+        </div>
+        <div class="prize-bottom-outside">
+          <div class="bottom-txt" id="games-count">共63款商品</div>
+        </div>
+
+        <!-- 概率公示 -->
+        <div class="prize-publicity">
+          <div class="publicity-title"></div>
+          <div class="publicity-content flex-around">
+            <div class="publicity-box publicity-box1">
+              <div class="publicity-txt">
+                <span id="legendary-rate">9</span>
+                <div class="publicity-percent">%</div>
+              </div>
+            </div>
+            <div class="publicity-box publicity-box2">
+              <div class="publicity-txt">
+                <span id="epic-rate">18</span>
+                <div class="publicity-percent">%</div>
+              </div>
+            </div>
+            <div class="publicity-box publicity-box3">
+              <div class="publicity-txt">
+                <span id="rare-rate">33</span>
+                <div class="publicity-percent">%</div>
+              </div>
+            </div>
+            <div class="publicity-box publicity-box4">
+              <div class="publicity-txt">
+                <span id="normal-rate">40</span>
+                <div class="publicity-percent">%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 兑换区域 -->
+      <div class="prize-exchange">
+        <div class="gotoarea" id="goto-exchange"></div>
+      </div>
+
+      <!-- 活动规则 -->
+      <div class="prize-rule" id="prize-rule">
+        <div class="rule-top"></div>
+        <div class="rule-content" id="rule-content">
+          <!-- 由 main.js 渲染规则内容 -->
+        </div>
+        <div class="rule-bottom"></div>
+      </div>
+
+      <!-- 底部购买区域 -->
+      <div class="prize-buy" id="prize-buy">
+        <img class="buy-order" id="buy-order" src="./images/buyorder.png" alt="">
+        <p class="buy-text-order">我的福袋</p>
+        <img class="buy-left" id="buy-1" src="./images/buy1.png" alt="">
+        <p class="buy-text buy-text-left" id="buy-text-1">¥56.9</p>
+        <img class="buy-right" id="buy-5" src="./images/buy5.png" alt="">
+        <p class="buy-text buy-text-right" id="buy-text-5">¥280</p>
+        <div class="buy-badge1">必出传说/史诗</div>
+        <div class="buy-badge2">立减4.5元</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 规则弹窗 -->
+  <div class="dialog-overlay" id="rule-dialog">
+    <div class="wrapper">
+      <div class="rule-block-dialog">
+        <div class="close-btn" id="close-rule"></div>
+        <div class="rule-dialog-content" id="rule-dialog-content">
+          <!-- 由 main.js 渲染规则内容 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 确认订单弹窗 -->
+  <div class="popup-overlay" id="order-popup-overlay"></div>
+  <div class="popup" id="order-popup">
+    <div class="close-btn2" id="order-popup-close"></div>
+    <div class="popup-title">确认抽取</div>
+    <div class="popup-content">
+      <img id="order-img" src="" alt="">
+      <div class="popup-content-right">
+        <div class="content-top" id="order-name"></div>
+        <div class="content-middle" id="order-desc"></div>
+        <div class="content-bottom" id="order-bottom">
+          <span>¥</span><span id="order-price"></span>
+          <div class="content-badge" id="order-badge">必出传说/史诗</div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-payment">
+      <div class="payment-color"></div>
+      <div class="payment-text">支付方式</div>
+    </div>
+    <div class="popup-zfb" id="pay-wx-row">
+      <div style="display:flex;align-items:center;">
+        <img class="zfb-badge" src="./images/weixin2.png" alt="">微信
+      </div>
+      <div class="mock-checkbox checked" id="cb-wx"></div>
+    </div>
+    <div class="popup-zfb" id="pay-zfb-row">
+      <div style="display:flex;align-items:center;">
+        <img class="zfb-badge" src="./images/zfb.png" alt="">支付宝
+      </div>
+      <div class="mock-checkbox" id="cb-zfb"></div>
+    </div>
+    <div class="popup-pay">
+      <div class="pay-btn" id="btn-pay-now">立即支付</div>
+    </div>
+    <div class="popup-18">
+      <div class="popup-18-checkbox">
+        <div class="mock-checkbox mock-checkbox-small checked" id="cb-proto"></div>
+      </div>
+      <p><span>我已满18岁，已阅读并同意</span><span style="color:#056DE8" id="rule-link">《活动规则》</span></p>
+    </div>
+  </div>
+
+  <!-- 中奖1弹窗 -->
+  <div class="dialog-overlay" id="winner1-dialog">
+    <div class="wrapper">
+      <div class="dialog-block">
+        <div class="close-btn" id="close-winner1"></div>
+        <div class="winner1-dialog-area">
+          <img class="winner-title" id="winner1-title" src="./images/luck3.png" alt="">
+          <div class="winner-3dm"></div>
+          <div class="winner-prize" id="winner1-prize">
+            <!-- 由 main.js 渲染单件奖品 -->
+          </div>
+          <img class="winner-again" id="winner1-again" src="./images/again.png" alt="" style="cursor:pointer;">
+          <div class="winner-order" id="winner1-order" style="cursor:pointer;">
+            <img src="./images/order3.png" alt="">
+            <div class="winner-txt">我的福袋</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中奖5弹窗 -->
+  <div class="dialog-overlay" id="winner5-dialog">
+    <div class="wrapper">
+      <div class="dialog-block">
+        <div class="close-btn" id="close-winner5"></div>
+        <div class="winner5-dialog-area">
+          <img class="winner-title" id="winner5-title" src="./images/allprize5.png" alt="">
+          <div class="winner-3dm"></div>
+          <div class="winner-prize" id="winner5-prize">
+            <!-- 由 main.js 渲染5件奖品 -->
+          </div>
+          <img class="winner-again" id="winner5-again" src="./images/again5.png" alt="" style="cursor:pointer;">
+          <div class="winner-order" id="winner5-order" style="cursor:pointer;">
+            <img src="./images/order3.png" alt="">
+            <div class="winner-txt">我的福袋</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 开奖动画遮罩层（显隐由 style.css 的 .overlay / .overlay.show 控制，勿写内联 display，否则会盖住 .show） -->
+  <div class="overlay" id="animation-overlay">
+    <div id="animation-container" class="title-bg"></div>
+  </div>
+
+  <!-- Loading 弹窗 -->
+  <div class="dialog-overlay" id="loading-dialog" style="z-index: 2000;">
+    <div class="loading-wrapper">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">模拟支付中...</p>
+    </div>
+  </div>
+
+  <!-- 下载引导弹窗 -->
+  <div class="dialog-overlay" id="downloadOverlay">
+    <div class="wrapper">
+      <div class="share-dialog">
+        <div class="share-dialog-title">
+          <div class="share-icon">
+            <img src="images/share-icon.png" />
+          </div>
+          <div class="share-title-txt">
+            <p>该功能仅限</p>
+            <p>在3DM游戏APP内使用</p>
+          </div>
+          <div class="close-btn" id="downloadCloseBtn"></div>
+        </div>
+        <div class="share-dialog-content">
+          <h5>如何参与活动？</h5>
+          <p id="downloadMessage">本活动需要在3DM游戏APP内参与哦~打开最新版3DM游戏APP，点击【社区-活动福袋】即可参与！</p>
+        </div>
+        <div class="share-btn-area">
+          <div class="download-btn" id="handle-download-btn">下载3DM游戏 APP参与活动</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./lottie.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
