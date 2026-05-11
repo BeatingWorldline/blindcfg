@@ -608,6 +608,9 @@ function bindEvents() {
   const ruleLink = document.getElementById("rule-link");
   if (ruleLink) {
     ruleLink.addEventListener("click", () => {
+      // 先关闭购买弹窗
+      hideOrderPopup();
+      // 再打开规则弹窗
       openDialog("rule-dialog");
     });
   }
